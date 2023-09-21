@@ -1,0 +1,65 @@
+.input-container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: joystix;
+  width: 100%;
+  overflow: hidden;
+  
+  label {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 4px;
+    text-align: left;
+  }
+
+  input {
+    outline: none;
+    border: 1px solid white;
+    border-radius: 4px;
+    height: 40px;
+    padding-left: 16px;
+    padding-right: 16px;
+    background: #1b1e27;
+    font-family: joystix;
+    font-size: 14px;
+    color: white;
+  }
+
+
+  .disabled {
+    border-color: #444750 !important;
+    background: #444750;
+  }
+  .disabled + .action-content {
+    background: #444750;
+    bottom: 8px;
+    img {
+      width: 24px !important;
+    }
+  }
+
+  input .large {
+    height: 40px;
+  }
+
+  input:read-only {
+    border: none;
+  }
+
+  .action-content {
+    position: absolute;
+    display: flex;
+    background: #1b1e27;
+    z-index: 100;
+    padding-left: 6px;
+    gap: 6px;
+    bottom: 6px;
+    right: 6px;
+
+    img {
+      width: 28px;
+      margin-right: 6px;
+    }
+  }
+}

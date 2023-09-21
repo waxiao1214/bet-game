@@ -1,0 +1,18 @@
+.header-container {
+  padding: 20px;
+  border-bottom: solid 1px #272A33;
+  display: flex;
+  .header-content {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .left {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+}

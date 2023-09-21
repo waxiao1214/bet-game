@@ -1,0 +1,51 @@
+.button-container {
+  position: relative;
+
+  button {
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+  button:hover {
+    opacity: 80%;
+  }
+  .primary {
+    background-color: #02E602;
+    padding-left: 18px;
+    padding-right: 18px;
+    font-size: 20px;
+  }
+  .secondary {
+    background: none !important;
+    color: white;
+    font-weight: 600;
+  }
+  .game_seconday {
+    font-family: joystix;
+    font-size: 12px;
+    background: none;
+    color: white;
+    border: solid 1px white;
+  }
+
+  .game_primary {
+    font-family: joystix;
+    font-size: 12px;
+    background: #02E602;
+    color: black;
+  }
+
+  .large {
+    height: 48px;
+    font-size: 20px;
+  }
+  .medium {
+    height: 40px;
+    font-size: 16px;
+  }
+  .small {
+    height: 32px;
+    font-size: 12px;
+  }
+}

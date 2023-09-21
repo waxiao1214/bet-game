@@ -1,0 +1,39 @@
+.casino-container {
+  max-width: 1024px;
+  width: 100%;
+  margin: auto;
+  margin-top: 40px;
+  background: #1B1E27;
+  display: flex;
+
+  p {
+    font-family: joystix;
+    font-size: 20px;
+    color: white;
+  }
+  .game-control {
+    max-width: 300px;
+    width: 100%;
+    padding: 16px;
+    background: #272a33;
+    box-shadow: 2px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .game-board {
+    padding-top: 32px;
+    padding-bottom: 32px;
+    width: 100%;
+  }
+  .error-msg {
+    color: red;
+    font-size: 12px;
+  }
+  .miners-gem-disabled-input {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+    justify-content: space-between;
+  }
+}
