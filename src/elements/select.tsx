@@ -20,7 +20,7 @@ export const SelectField = (props: SelectProps) => {
       },
     }),
   };
-  
+
   return <div className="select-container">
     <label>{label}</label>
     <Select

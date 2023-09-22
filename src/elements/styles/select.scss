@@ -25,6 +25,14 @@
     padding-left: 6px;
   }
 
+  .custom-select__input-container:hover {
+    border-color: white;
+  }
+
+  .custom-select__control:hover {
+    border-color: white;
+  }
+  
   .custom-select__control--is-focused {
     border: solid 1px white;
     outline: none;

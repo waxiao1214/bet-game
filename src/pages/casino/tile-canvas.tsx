@@ -11,11 +11,11 @@ interface TileCanvasProps {
   handleOpenTile: (value: number[]) => void
   randomTile: number
   handleGameEnd: (value: boolean) => void
+  isCashout?: boolean
 }
 
 const TileCanvas: React.FC<TileCanvasProps> = (props) => {
-  const { playing, bombIndexes, handleOpenTile, handleGameEnd, randomTile } = props;
-
+  const { playing, bombIndexes, handleOpenTile, handleGameEnd, randomTile, isCashout } = props;
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [openTileIndexes, setOpenTileIndexes] = useState<number[]>([]);
   const [bombClicked, setBombClicked] = useState(false);
@@ -25,7 +25,7 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
   const imageSize = 60;
   const smallImageSize = 40
   const gap = 16;
-  const opacity = bombClicked ? 0.3 : 1;
+  const opacity = (bombClicked || isCashout) ? 0.3 : 1;
 
   const bombImage = new Image();
   bombImage.src = bombImageSrc;
@@ -61,7 +61,7 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
       const x = col * (tileSize + gap);
       const y = row * (tileSize + gap);
 
-      if (bombClicked) {
+      if (bombClicked || isCashout) {
         ctx.fillStyle = '#1b1b1b';
         ctx.shadowOffsetX = 4;
         ctx.shadowOffsetY = 4;
@@ -75,7 +75,8 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
       }
 
       ctx.fillRect(x, y, tileSize, tileSize);
-
+      // console.log(openTileIndexes.includes(index))
+     
       if (openTileIndexes.includes(index)) {
         const imageToDraw = bombIndexes.includes(index) ? bombImage : gemImage;
         const imageX = x + (tileSize - imageSize) / 2;
@@ -93,6 +94,12 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
           ctx.globalAlpha = opacity;
           ctx.drawImage(gemImage, imageX, imageY, smallImageSize, smallImageSize);
         }
+      } else if (!openTileIndexes.includes(index) && isCashout) {
+        const imageToDraw = bombIndexes.includes(index) ? bombImage : gemImage;
+        const imageX = x + (tileSize - smallImageSize) / 2;
+        const imageY = y + (tileSize - smallImageSize) / 2;
+        ctx.globalAlpha = opacity;
+        ctx.drawImage(imageToDraw, imageX, imageY, smallImageSize, smallImageSize);
       } else {
         const imageX = x + (tileSize - imageSize) / 2;
         const imageY = y + (tileSize - imageSize) / 2;
@@ -100,7 +107,7 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
       }
       ctx.globalAlpha = 1;
     }
-  }, [openTileIndexes, bombClicked]);
+  }, [openTileIndexes, bombClicked, isCashout]);
 
   const handleTileClick = (index: number) => {
     if(!bombClicked) {
@@ -136,9 +143,6 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
 
   useEffect(() => {
     if(playing) {
-      setOpenTileIndexes([...new Array(0)]);
-      setBombClicked(false);
-    } else {
       setOpenTileIndexes([...new Array(0)]);
       setBombClicked(false);
     }

@@ -10,18 +10,22 @@ import { MINER_COUNT } from '../../core/constant'
 import { TOption } from '../../core/types'
 import TileCanvas from './tile-canvas'
 import { getTotalProfit } from '../../core/utils'
+import { CasinoGameCashedOutPopup } from '../../components/popup/casino-game-cashed-out';
+import { CasinoGameBombPopup } from '../../components/popup/casino-game-bomb-popup';
 
 const initArray = Array.from(Array(25).keys(), n => n);
 
 export const CasinoGame = () => {
   const [betAmount, setBetAmount] = useState<number>(0);
-  const [bombCount, setBombcount] = useState<number>(0);
+  const [bombCount, setBombcount] = useState<number>(1);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [gemCount, setGemCount] = useState<number>(0);
   const [randomTile, setRandomTile] = useState<number>(-1);
   const [remainTiles, setRemainTiles] = useState<number[]>(initArray);
   const [bombs, setBombs] = useState<number[]>([]);
+  const [isCashout, setIsCashout] = useState<boolean>(false);
+  const [bombPopup, showBombPopup] = useState<boolean>(false);
 
   const handleClick = (value: string) => {
     if(value === 'max') return setBetAmount(Number(1000));
@@ -55,7 +59,7 @@ export const CasinoGame = () => {
 
   const getMinerOptions = () => {
     return Array(MINER_COUNT).fill(null).map((_, key) => {
-      return { label: key.toString(), value: key} as TOption
+      return { label: (++key).toString(), value: key} as TOption
     })
   }
 
@@ -75,11 +79,14 @@ export const CasinoGame = () => {
     if(!betAmount) return setError('Please set coin amount!');
     setError('');
     setBombs(generateBombIndexes(bombCount));
+    setIsCashout(false);
+    showBombPopup(false);
     setIsStart(true);
   }
 
   const handleCashout = () => {
     setIsStart(false)
+    setIsCashout(true);
   }
 
   const handleOpenTile = (tiles: number[]) => {
@@ -171,10 +178,21 @@ export const CasinoGame = () => {
       <TileCanvas
         playing={isStart}
         bombIndexes={bombs}
+        isCashout={isCashout}
         randomTile={randomTile}
         handleOpenTile={(tiles) => handleOpenTile(tiles)}
-        handleGameEnd={() => setIsStart(false)}
+        handleGameEnd={() => {
+          setIsStart(false)
+          showBombPopup(true)
+        }}
       />
+      { isCashout && <CasinoGameCashedOutPopup 
+        betAmount={betAmount} 
+        amount={Number(getTotalProfit(gemCount))}
+      />}
+      {
+        bombPopup && <CasinoGameBombPopup />
+      }
     </div>
   </div>
 }
