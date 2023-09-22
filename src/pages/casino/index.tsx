@@ -82,6 +82,7 @@ export const CasinoGame = () => {
     setIsCashout(false);
     showBombPopup(false);
     setIsStart(true);
+    setGemCount(0)
   }
 
   const handleCashout = () => {
