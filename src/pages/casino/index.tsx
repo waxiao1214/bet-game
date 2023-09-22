@@ -6,7 +6,7 @@ import Bomb from '../../static/img/bomb.svg'
 import Gem from '../../static/img/gem.svg'
 import '../styles/casino.scss'
 import { SelectField } from '../../elements/select'
-import { MINER_COUNT } from '../../core/constant'
+import { MAX_COIN, MINER_COUNT } from '../../core/constant'
 import { TOption } from '../../core/types'
 import TileCanvas from './tile-canvas'
 import { getTotalProfit } from '../../core/utils'
@@ -16,7 +16,7 @@ import { CasinoGameBombPopup } from '../../components/popup/casino-game-bomb-pop
 const initArray = Array.from(Array(25).keys(), n => n);
 
 export const CasinoGame = () => {
-  const [betAmount, setBetAmount] = useState<number>(0);
+  const [betAmount, setBetAmount] = useState<number>(100);
   const [bombCount, setBombcount] = useState<number>(1);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -28,8 +28,8 @@ export const CasinoGame = () => {
   const [bombPopup, showBombPopup] = useState<boolean>(false);
 
   const handleClick = (value: string) => {
-    if(value === 'max') return setBetAmount(Number(1000));
-    else return  setBetAmount(Number(value) * betAmount);
+    if(value === 'max' || Number(value) * betAmount >= MAX_COIN) return setBetAmount(Number(1000));
+    else return  setBetAmount(parseFloat((Number(value) * betAmount).toFixed(2)));
   }
 
   const pickupRandom = () => {
