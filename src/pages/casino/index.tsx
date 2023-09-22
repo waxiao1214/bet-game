@@ -91,7 +91,7 @@ export const CasinoGame = () => {
 
   const handleOpenTile = (tiles: number[]) => {
     setRemainTiles([...initArray.filter(item => !tiles.includes(item))]);
-    setGemCount(tiles.length);
+    setGemCount(tiles.filter(tile => tile !== -1).length);
   }
 
   const renderComponentBeforeGame = () => {

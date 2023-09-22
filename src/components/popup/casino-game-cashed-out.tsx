@@ -13,7 +13,7 @@ export const CasinoGameCashedOutPopup = (props: CasinoGameCashedOutPopupProps) =
       <div className="cashout-popup">
         <p>{multi} x</p>
         <div className='seperator'></div>
-        <p>$ {amount}</p>
+        <p>$ {amount + betAmount}</p>
       </div>
     </div>
   )

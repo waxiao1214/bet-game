@@ -1,3 +1,4 @@
 export const getTotalProfit = (value: number) => {
-  return (5 +  Math.pow(1.3, value)).toFixed(2)
+  if(value === 0) return 0;
+  return ( Math.pow(1.3, value)).toFixed(2)
 }
