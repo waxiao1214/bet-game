@@ -67,7 +67,7 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
         ctx.shadowOffsetY = 4;
         ctx.shadowColor = '#00000044';
       } else {
-        ctx.fillStyle = openTileIndexes.includes(index) ? '#1b1b1b' : '#272A33'; // Change the colors as needed
+        ctx.fillStyle = openTileIndexes.includes(index) ? '#1b1b1b' : '#272A33';
         ctx.globalAlpha = 1;
         ctx.shadowOffsetX = 4;
         ctx.shadowOffsetY = 4;
@@ -75,7 +75,6 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
       }
 
       ctx.fillRect(x, y, tileSize, tileSize);
-      // console.log(openTileIndexes.includes(index))
      
       if (openTileIndexes.includes(index)) {
         const imageToDraw = bombIndexes.includes(index) ? bombImage : gemImage;
@@ -86,7 +85,6 @@ const TileCanvas: React.FC<TileCanvasProps> = (props) => {
         if(bombIndexes.includes(index)) {
           const imageX = x + (tileSize - imageSize) / 2;
           const imageY = y + (tileSize - imageSize) / 2;
-          // ctx.globalAlpha = opacity;
           ctx.drawImage(bombImage, imageX, imageY, imageSize, imageSize);
         } else {
           const imageX = x + (tileSize - smallImageSize) / 2;
